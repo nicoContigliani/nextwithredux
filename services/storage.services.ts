@@ -1,5 +1,7 @@
 
 export const readLocalStorage = async () => {
+      let URLactual: any = window?.location;
+        console.log(URLactual);
    console.log("todo lee")
 }
 
