@@ -14,14 +14,16 @@ import { useRouter } from 'next/navigation';
 import { formaterDataAuth } from '@/services/formaterDataAuth.services';
 import { canPass } from '@/services/protectionRoutes.services';
 import Auth from '@/components/Auth/Auth';
+import Cards from '@/components/Card/Cards';
+import Inputs from '@/components/Inputs/Inputs';
 
 export default function Home() {
- const[]=useState()
+  const [] = useState()
 
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
 
-  const storedTodo =  readLocalStorage();
+  const storedTodo = readLocalStorage();
   useEffect(() => {
     async function fetchData() {
       const AxiosG: any = await useAxios({
@@ -56,7 +58,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <button type="button" onClick={() => router.push('/about')}>
+      {/* <button type="button" onClick={() => router.push('/about')}>
         Dashboard
       </button>
       <h1>Home</h1>
@@ -81,13 +83,10 @@ export default function Home() {
       >
         Increment by 2
       </button>
+ */}
 
 
-
-       
-
-
-
+  
 
 
 
