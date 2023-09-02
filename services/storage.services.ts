@@ -1,18 +1,29 @@
 
-export const readLocalStorage = async () => {
-    //   let URLactual: any = window?.location;
-    //     console.log(URLactual);
-   console.log("todo lee")
+export const readLocalStorage = async (todo: any[]) => {
+    let element: any;
+    const totalObject: any = {};
+
+    for (let index = 0; index < todo.length; index++) {
+        const element = todo[index];
+        const saved: any = localStorage.getItem(element);
+
+        if (saved !== null)  totalObject[element] = JSON.parse(saved);
+        
+    }
+
+    return totalObject
 }
+export const writedLocalStorage = (props: any) => {
+    // const { token, islogin, user, id } = props
 
-export const writedLocalStorage = async (props: any) => {
-    const { token, islogin, user, _id } = props
+    const keys = Object.keys(props);
 
-    localStorage.setItem("islogin", JSON.stringify(islogin));
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("token", JSON.stringify(token));
-    localStorage.setItem("_id", JSON.stringify(_id));
+    for (const key of keys) {
+        localStorage.setItem(key, JSON.stringify(props[key]));
+    }
 
     return true
 
 }
+
+

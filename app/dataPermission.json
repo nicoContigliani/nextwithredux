@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "routes": [
+      "/",
+      "/about",
+      "/contact",
+      "/dashboard"
+    ]
+  },
+  "employes": {
+    "routes": [
+      "/",
+      "/about",
+      "/contact"
+    ]
+  }
+}

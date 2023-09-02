@@ -4,12 +4,16 @@
 import './globals.css'
 
 import { Providers } from './GlobalRedux/provider';
-import ProtectedRoute from '@/components/protectedrouter/ProtectedRoute';
 import { canPass } from '@/services/protectionRoutes.services';
 import dynamic from 'next/dynamic';
 import Auth from '@/components/Auth/Auth';
+// import ProtectedRoute from './ProtectedRoutes';
+
+
 // import Navbar from '@/components/Navbar/Navbar';
 const Navbar = dynamic(() => import('@/components/Navbar/Navbar'), { ssr: false })
+const ProtectedRoute = dynamic(() => import('./ProtectedRoutes'), { ssr: false })
+
 
 
 
@@ -21,7 +25,6 @@ export default function RootLayout({
 
   // const data = false
   // const retur = canPass(data)
-
 
   return (
     <html lang="en">

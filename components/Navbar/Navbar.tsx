@@ -6,15 +6,33 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Auth from '../Auth/Auth';
 import styles from './Navbar.module.css'; // Importa los estilos CSS
+import { writedLocalStorage } from '@/services/storage.services';
 
 
 const Navbar: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+
+  const initialState: AuthState = {
+    token: "",
+    islogin: false,
+    user: {},
+    id: ""
+  };
+
+
+
+
+
+  const clearStorage = () => {
+    writedLocalStorage(initialState)
+    window.location.reload(false);
+  }
 
 
   return (
@@ -37,7 +55,10 @@ const Navbar: React.FC = () => {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
-         <Auth/>
+        <li>
+          <Link href="/dashboard">Dashboard</Link>
+        </li>
+        <button onClick={clearStorage}>cerrar</button>
       </ul>
     </nav>
   );

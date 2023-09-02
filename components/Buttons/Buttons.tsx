@@ -1,8 +1,17 @@
 import React from 'react'
 
-const Buttons = (props: any) => {
+const Buttons = ({
+    textLavel,
+    children,
+    className,
+    onClick
+}: any) => {
     return (
-        <button {...props}>{props.children}</button>
+        <button className={className}
+        onClick={onClick}
+        >
+            {children ? children : textLavel}
+        </button>
     )
 }
 
