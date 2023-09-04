@@ -10,32 +10,33 @@ interface AxiosProps {
 const useAxios = async (props: AxiosProps): Promise<any> => {
   const { url, method, body, idParams } = props;
   let dataReturn;
-
+  
   try {
     const token: string = 'tu_token_aqui' || '';
-
+    
     const headers: { [key: string]: string } = {};
-
+    
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
-
+    
     const urls = idParams !== null
-      ? `${url}/${idParams}`
-      : `${url}`;
-
-
-    let data = {
-      email: "nico.contigliani@gmail.com",
-      password: "123456789"
-    }
-    console.log("🚀 ~ file: useAxios.services.ts:33 ~ useAxios ~ data:", data)
+    ? `${url}/${idParams}`
+    : `${url}`;
+    
+    
+    // let data = {
+    //   email: "nico.contigliani@gmail.com",
+    //   password: "123456789"
+    // }
+    // console.log("🚀 ~ file: useAxios.services.ts:32 ~ useAxios ~ body:", body)
+    // console.log("🚀 ~ file: useAxios.services.ts:33 ~ useAxios ~ data:", data)
 
 
     const response = await axios({
       method: method, // Ensure method is of type Method from axios
       url: urls,
-      data: data,
+      data: body,
       headers: headers
     });
     console.log("🚀 ~ file: useAxios.services.ts:42 ~ useAxios ~ response:", response)

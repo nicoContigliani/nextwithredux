@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { readLocalStorage } from '@/services/storage.services';
 
 import dataPemissionRoutes from '@/app/dataPermission.json';
+import { authAsync, preloadAuthData } from './GlobalRedux/Features/auth/authSlice';
 
 
 
@@ -34,12 +35,15 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const auth: any = useSelector((state: RootState) => state.auth);
-  // console.log("🚀 ~ file: ProtectedRoutes.tsx:33 ~ auth:", auth)
 
-  // if (auth?.token?.length == 0) console.log("vacio retorna a /")
 
   const dataSerch: any[] = ["token", "islogin", "user", "id"]
   // const dataR = await readLocalStorage(dataSerch)
+
+  useEffect(() => {
+    dispatch(preloadAuthData());
+  }, [dispatch]);
+
 
 
   useEffect(() => {
@@ -47,7 +51,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const todoR = async () => {
       const data = await readLocalStorage(dataSerch)
       if (!data?.isLogin) router.push('/')
-      setTodo(data)
+      // if (data?.isLogin && !auth.isLogin) dispatch(authAsync(data))
+        setTodo(data)
     }
     todoR()
 
@@ -60,17 +65,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
 
   useEffect(() => {
-    if (todo.user && !todo?.user?.admins) router.push('/')
-    // const adminJ = dataPemissionRoutes?.admin?.routes
-    // const employesJ = dataPemissionRoutes?.employes?.routes
     const { admin: { routes: adminRoutes }, employes: { routes: employesRoutes } } = dataPemissionRoutes || {};
 
 
-    if (adminRoutes?.includes(pathname) ) console.log("🚀 ~ file: ProtectedRoutes.tsx:77 ~ useEffect ~ pathname:", pathname,"****************",todo?.user?.admins)
+    if (todo?.user?.admins && adminRoutes?.includes(pathname)) console.log("🚀 ~ file: ProtectedRoutes.tsx:68 ~ useEffect ~ pathname:", pathname, "*********************admin*******************************")
 
-    if (!employesRoutes?.includes(pathname)) console.log("****************si******************", pathname, "*******************",)
-
-
+    if (!todo?.user?.admins && !employesRoutes?.includes(pathname)) router.push('/')
 
 
   }, [pathname])

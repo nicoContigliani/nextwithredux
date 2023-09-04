@@ -16,6 +16,7 @@ const Auths = () => {
     const dispatch = useAppDispatch();
 
     const auth = useAppSelector(selectAuth);
+    console.log("🚀 ~ file: Auth.tsx:19 ~ Auths ~ auth:", auth)
 
 
     const onAction = async () => {

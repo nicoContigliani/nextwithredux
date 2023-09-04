@@ -34,6 +34,7 @@ export default function Home() {
   const router = useRouter()
 
   const auth = useAppSelector(selectAuth);
+  console.log("🚀 ~ file: page.tsx:37 ~ Home ~ auth:", auth)
   const dataSearch: any[] = ["token", "islogin", "user", "id"]
 
 

@@ -1,7 +1,7 @@
 'use client';
 
 // import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from './Features/counter/counterSlice';
+ import counterReducer from './Features/counter/counterSlice';
 // import authReducer from '@/app/GlobalRedux/Features/auth/authSlice'
 
 
@@ -23,9 +23,11 @@ export const store = configureStore({
   reducer: {
     //   user: userReducer,
     auth: authReducer,
+    counter: counterReducer,
     //   company:companyReducer,
     //   insurance:insuranceReducer,
   },
+
 });
 
 export type AppDispatch = typeof store.dispatch;

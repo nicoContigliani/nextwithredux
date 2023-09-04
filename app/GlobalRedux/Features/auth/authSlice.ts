@@ -3,7 +3,7 @@ import { RootState, AppThunk } from "../../store";
 import useAxios from "@/services/useAxios.services";
 import axios from "axios";
 import { formaterDataAuth } from "@/services/formaterDataAuth.services";
-import { writedLocalStorage } from "@/services/storage.services";
+import { readLocalStorage, writedLocalStorage } from "@/services/storage.services";
 // import { AuthState } from "./IAuth";
 // import useAxios from "../../Hooks/useAxios";
 // import useLocalStorageSet from "../../Hooks/localstorage";
@@ -45,42 +45,63 @@ let dataReturn: any;
 
 
 const userDatas = {
-    "email": "nico.contigliani@gmail.com",
+    "email": "pedro.contigliani@gmail.com",
     "password": "123456789"
 }
 
-export const authAsync = createAsyncThunk(
-    "Auth/AxiosAuth",
-    async (userData: any) => {
-        try {
-
-            if(false) return true
+const dataSearch: any[] = ["token", "islogin", "user", "id"]
 
 
-            const todo: any = {
-                url: "http://localhost:3001/Auth/Auth",
-                method: 'PUT', // Use 'GET', 'POST', 'PUT', etc. as needed
-                body: userDatas,
-                idParams: null,
-            }
-
-            const response = await useAxios(todo)
-            const dataUserFormated = await formaterDataAuth(response)
-
-            userDataS.islogin = await dataUserFormated?.login;
-            userDataS.user = await dataUserFormated;
-            userDataS.token = await dataUserFormated?.token;
-            userDataS.id = await dataUserFormated?.id
-
-            dataReturn = dataUserFormated
 
 
-            const LocalSReturn = await writedLocalStorage(userDataS)
-        } catch (error) {
-            console.log("🚀 ~ file: authSlice.ts:58 ~ error:", error)
+
+export const preloadAuthData:any = createAsyncThunk(
+    "auth/preload",
+    async () => {
+        const localStorageData = await readLocalStorage(dataSearch);
+
+        if (localStorageData.islogin) {
+            return localStorageData;
         }
 
+        return null;
+    }
+);
 
+
+
+
+
+
+
+export const authAsync = createAsyncThunk(
+    "auth",
+    async (userData: any) => {
+        console.log("🚀 ~ file: authSlice.ts:55 ~ userData:", userData)
+
+
+
+
+
+        const todo: any = {
+            url: "http://localhost:3001/Auth/Auth",
+            method: 'PUT', // Use 'GET', 'POST', 'PUT', etc. as needed
+            body: userDatas,
+            idParams: null,
+        }
+
+        const response = await useAxios(todo)
+        const dataUserFormated = await formaterDataAuth(response)
+
+        userDataS.islogin = await dataUserFormated?.login;
+        userDataS.user = await dataUserFormated;
+        userDataS.token = await dataUserFormated?.token;
+        userDataS.id = await dataUserFormated?.id
+
+        dataReturn = dataUserFormated
+
+
+        const LocalSReturn = await writedLocalStorage(userDataS)
 
 
 
@@ -90,7 +111,7 @@ export const authAsync = createAsyncThunk(
 );
 
 export const authSlice = createSlice({
-    name: "auth",
+    name: "auth/slice",
     initialState,
     reducers: {
         authd: (state, action: PayloadAction<any>) => {
@@ -99,6 +120,14 @@ export const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(preloadAuthData.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state.islogin = action.payload.islogin || false;
+                    state.user = action.payload.user || {};
+                    state.token = action.payload.token || "";
+                    state.id = action.payload.id || "";
+                }
+            })
             .addCase(authAsync.pending, (state) => {
                 state.islogin = false;
             })
@@ -117,6 +146,7 @@ export const authSlice = createSlice({
 export const { authd } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
+console.log("🚀 ~ file: authSlice.ts:131 ~ selectAuth:", selectAuth)
 
 
 export default authSlice.reducer;
