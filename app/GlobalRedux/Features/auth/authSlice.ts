@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../store";
 import useAxios from "@/services/useAxios.services";
-import axios from "axios";
 import { formaterDataAuth } from "@/services/formaterDataAuth.services";
 import { readLocalStorage, writedLocalStorage } from "@/services/storage.services";
-// import { AuthState } from "./IAuth";
-// import useAxios from "../../Hooks/useAxios";
-// import useLocalStorageSet from "../../Hooks/localstorage";
+import dotenv from 'dotenv';
+dotenv.config({ path: '@/.env' });
 
+import routesName from '../../../routes.api.json'
 
 
 
@@ -45,7 +44,7 @@ let dataReturn: any;
 
 
 const userDatas = {
-    "email": "pedro.contigliani@gmail.com",
+    "email": "nico.contigliani@gmail.com",
     "password": "123456789"
 }
 
@@ -71,15 +70,16 @@ export const preloadAuthData:any = createAsyncThunk(
 
 
 
-
+// const apiUrl = `${process.env.HOSTAPI}:${process.env.PUERTOAPI}${routesName.Auth}` || `http://localhost:3001/Auth/Auth`
 
 
 export const authAsync = createAsyncThunk(
     "auth",
     async (userData: any) => {
-        console.log("🚀 ~ file: authSlice.ts:55 ~ userData:", userData)
-
-
+        
+        
+        console.log("🚀 ~ file: authSlice.ts:9 ~ routesName:", routesName)
+        console.log("🚀 ~ file: authSlice.ts:75 ~ process.env.PUERTOAPI:", process.env.NEXT_PUBLIC_API_URI)
 
 
 
@@ -91,6 +91,7 @@ export const authAsync = createAsyncThunk(
         }
 
         const response = await useAxios(todo)
+        console.log("🚀 ~ file: authSlice.ts:94 ~ response:", response)
         const dataUserFormated = await formaterDataAuth(response)
 
         userDataS.islogin = await dataUserFormated?.login;
@@ -146,7 +147,6 @@ export const authSlice = createSlice({
 export const { authd } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
-console.log("🚀 ~ file: authSlice.ts:131 ~ selectAuth:", selectAuth)
 
 
 export default authSlice.reducer;

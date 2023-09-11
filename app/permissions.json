@@ -1,0 +1,35 @@
+{
+    "roles": {
+        "Admin": {
+            "creates": true,
+            "reads": true,
+            "updates": true,
+            "deletes": true,
+            "admins": true,
+            "exports": true,
+            "imports": true,
+            "approve": true,
+            "generate_reports": true,
+            "configure": true,
+            "restrict": true
+        },
+        "Employed": {
+            "creates": true,
+            "reads": true,
+            "updates": true,
+            "deletes": false,
+            "admins": true,
+            "exports": false,
+            "imports": true,
+            "approve": true,
+            "generate_reports": true,
+            "configure": false,
+            "restrict": true
+        },
+        "Customer": {
+            "updateResource": false,
+            "createResource": false,
+            "deleteResource": false
+        }
+    }
+}

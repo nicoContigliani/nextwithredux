@@ -1,26 +1,35 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-"use client"
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation';
-import { useLocation } from 'react-router-dom';
-import Buttons from '../Buttons/Buttons';
-import Inputs from '../Inputs/Inputs';
-import Cards from '../Card/Cards';
+import { crudSlice } from '@/app/GlobalRedux/Features/CRUD/crudSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
-import { authAsync, selectAuth } from '@/app/GlobalRedux/Features/auth/authSlice';
+import React from 'react'
+import { useState } from 'react';
+import Buttons from '../Buttons/Buttons';
+import Cards from '../Card/Cards';
+import Inputs from '../Inputs/Inputs';
 
-
-const Auths = () => {
+const PruebaCrud = () => {
     const [data, setData] = useState([])
 
     const dispatch = useAppDispatch();
-    const auth = useAppSelector(selectAuth);
-    const onAction = async () => {
-        dispatch(authAsync(data))
+    // const auth = useAppSelector(selectAuth);
+
+    const todo: any = {
+        url: "http://localhost:3001/Auth/Auth",
+        method: 'PUT', // Use 'GET', 'POST', 'PUT', etc. as needed
+        body: data,
+        idParams: null,
     }
+
+
+
+    const onAction = async () => {
+        dispatch(crudSlice(todo))
+    }
+
 
     return (
         <div>
+            <h1>Pruebas </h1>
+
             <div className="login__content">
 
                 <Cards
@@ -67,9 +76,8 @@ const Auths = () => {
 
                 </Cards>
             </div>
-
         </div>
     )
 }
 
-export default Auths
+export default PruebaCrud

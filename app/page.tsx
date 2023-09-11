@@ -22,6 +22,7 @@ import Inputs from '@/components/Inputs/Inputs';
 import { authAsync, selectAuth } from './GlobalRedux/Features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from './GlobalRedux/hooks';
 import Buttons from '@/components/Buttons/Buttons';
+import PruebaCrud from '@/components/pruebaCrud/PruebaCrud';
 
 
 export default function Home() {
@@ -133,9 +134,14 @@ export default function Home() {
         </Cards>
       </div> */}
 
-      {
+      {/* {
         isLogins ? <h1>Hola que tal</h1> : <Auth />
+      } */}
+
+      {
+        isLogins ? <PruebaCrud/> : <Auth />
       }
+
 
 
     </main>

@@ -6,7 +6,7 @@ import type { RootState } from './GlobalRedux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { readLocalStorage } from '@/services/storage.services';
 
-import dataPemissionRoutes from '@/app/dataPermission.json';
+import dataPemissionRoutes from '@/app/dataPermissionRoutes.json';
 import { authAsync, preloadAuthData } from './GlobalRedux/Features/auth/authSlice';
 
 
