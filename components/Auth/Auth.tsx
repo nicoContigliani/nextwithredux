@@ -8,6 +8,7 @@ import Inputs from '../Inputs/Inputs';
 import Cards from '../Card/Cards';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { authAsync, selectAuth } from '@/app/GlobalRedux/Features/auth/authSlice';
+import styles from './Auth.module.css'; // Importa los estilos CSS
 
 
 const Auths = () => {
@@ -20,7 +21,7 @@ const Auths = () => {
     }
 
     return (
-        <div>
+        <div className={styles.body}>
             <div className="login__content">
 
                 <Cards

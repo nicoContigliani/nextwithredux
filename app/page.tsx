@@ -87,61 +87,16 @@ export default function Home() {
   return (
     <main className={styles.main}>
 
-      {/* <div className="login__content">
-
-        <Cards
-          className='login__form'
-          textLavel={'prueba'}
-          src={''}
-          variant={'top'}
-          title={'Tomá por Mirón'}        >
-
-          <div className="login__inputs">
-
-            <Inputs
-              className='login__input'
-              autocomplete=''
-              data={data}
-              setData={setData}
-              placeholder="mail"
-              name="mail"
-              type={''}
-              minlength={''} autoFocus={false} color={''} defaultValue={undefined} disabled={false} fullWidth={false} id={''} inputComponent={undefined} multiline={false} label={''} rows={''} />
-
-            <Inputs
-              className='login__input'
-              data={data}
-              setData={setData}
-              placeholder="Password"
-              name="password"
-              type="password"
-              minlength={''} autoFocus={false} color={''} defaultValue={undefined} disabled={false} fullWidth={false} id={''} inputComponent={undefined} multiline={false} label={''} rows={''} />
-          </div>
-
-
-
-          <div className="login__buttons">
-            <Buttons
-              textLavel="todo"
-              id="todo"
-              className='login__button'
-              onClick={() => onAction()}
-            />
-
-
-          </div>
-
-        </Cards>
-      </div> */}
-
-      {/* {
-        isLogins ? <h1>Hola que tal</h1> : <Auth />
-      } */}
-
+  
       {
         isLogins ? <PruebaCrud/> : <Auth />
       }
-
+     <div className="row">
+      <div className="col-2">si</div>
+      <div className="col-2">
+        
+      </div>
+     </div>
 
 
     </main>

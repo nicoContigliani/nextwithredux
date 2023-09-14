@@ -8,6 +8,7 @@ import { canPass } from '@/services/protectionRoutes.services';
 import dynamic from 'next/dynamic';
 import Auth from '@/components/Auth/Auth';
 // import ProtectedRoute from './ProtectedRoutes';
+import styles from './layout.module.css'; // Importa los estilos CSS
 
 
 // import Navbar from '@/components/Navbar/Navbar';
@@ -40,7 +41,7 @@ export default function RootLayout({
 
 
 
-      <body>
+      <body className={styles.todo}>
         <Providers>
           <ProtectedRoute>
             <Navbar />

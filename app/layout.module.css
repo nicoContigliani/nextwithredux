@@ -1,0 +1,7 @@
+.todo{
+  background-image: url('./../components/images/fondo.jpg');
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
